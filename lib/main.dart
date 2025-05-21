@@ -3,19 +3,21 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pasacao_hotline/models/office.dart';
 import 'package:pasacao_hotline/pages/intro_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pasacao_hotline/secrets.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load .env file
-  await dotenv.load();
+  if (supabaseUrl.isEmpty || supabaseKey.isEmpty) {
+    print('❌ Missing Supabase env variables');
+    return;
+  }
 
   // Initialize Supabase
   await Supabase.initialize(
-      url: dotenv.env['SUPABASE_URL']!,
-      anonKey: dotenv.env['SUPABASE_ANON_KEY']!
-    );
+    url: supabaseUrl,
+    anonKey: supabaseKey,
+  );
 
   // Initialize Hive and register Office adapter
   await Hive.initFlutter();
