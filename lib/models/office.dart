@@ -20,7 +20,7 @@ class Office {
   final String? radio;
 
   @HiveField(5)
-  final String? imageUrl;
+  final String imageAsset;
 
   Office({
     this.id,
@@ -28,7 +28,7 @@ class Office {
     this.mobile,
     this.phone,
     this.radio,
-    this.imageUrl,
+    required this.imageAsset,
   });
 
   factory Office.fromJson(Map<String, dynamic> json) {
@@ -38,7 +38,7 @@ class Office {
       mobile: (json['mobile'] as List?)?.map((e) => e.toString()).toList(),
       phone: (json['phone'] as List?)?.map((e) => e.toString()).toList(),
       radio: json['radio'],
-      imageUrl: json['image_url'],
+      imageAsset: json['image_asset'] ?? 'default.png',
     );
   }
 
@@ -49,7 +49,7 @@ class Office {
       'mobile': mobile,
       'phone': phone,
       'radio': radio,
-      'image_url': imageUrl,
+      'image_asset': imageAsset,
     };
   }
 }

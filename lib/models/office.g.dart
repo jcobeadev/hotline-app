@@ -22,7 +22,7 @@ class OfficeAdapter extends TypeAdapter<Office> {
       mobile: (fields[2] as List?)?.cast<String>(),
       phone: (fields[3] as List?)?.cast<String>(),
       radio: fields[4] as String?,
-      imageUrl: fields[5] as String?,
+      imageAsset: fields[5] as String,
     );
   }
 
@@ -41,7 +41,7 @@ class OfficeAdapter extends TypeAdapter<Office> {
       ..writeByte(4)
       ..write(obj.radio)
       ..writeByte(5)
-      ..write(obj.imageUrl);
+      ..write(obj.imageAsset);
   }
 
   @override

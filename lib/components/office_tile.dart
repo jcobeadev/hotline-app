@@ -30,7 +30,7 @@ class OfficeTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/city_logo.png', // Replace with your actual asset
+              'assets/images/logos/${office.imageAsset}',
               height: 100,
               fit: BoxFit.cover,
             ),
