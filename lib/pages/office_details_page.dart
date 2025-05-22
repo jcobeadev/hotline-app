@@ -162,6 +162,8 @@ class OfficeDetailsPage extends StatelessWidget {
                   )
                 ],
               ),
+
+              const SizedBox(height: 80),
           ],
         ),
       ),
