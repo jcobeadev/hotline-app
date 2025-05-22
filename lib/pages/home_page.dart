@@ -83,6 +83,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 12),
               Expanded(
                 child: GridView.builder(
+                  padding: const EdgeInsets.only(bottom: 48),
                   itemCount: offices.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,

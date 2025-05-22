@@ -11,14 +11,16 @@ class OfficeDetailsPage extends StatelessWidget {
   const OfficeDetailsPage({super.key, required this.office});
 
   void _launchCall(String number) async {
-    final Uri url = Uri(scheme: 'tel', path: number);
+    final sanitizedNumber = number.replaceAll(RegExp(r'\s+'), '');
+    final Uri url = Uri(scheme: 'tel', path: sanitizedNumber);
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     }
   }
 
   void _launchSms(String number) async {
-    final Uri url = Uri(scheme: 'sms', path: number);
+    final sanitizedNumber = number.replaceAll(RegExp(r'\s+'), '');
+    final Uri url = Uri(scheme: 'sms', path: sanitizedNumber);
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     }
