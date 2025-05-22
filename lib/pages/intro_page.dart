@@ -7,7 +7,7 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300], // Use your theme color here
+      backgroundColor: Colors.grey[100], // Use your theme color here
       body: SafeArea(
         child: Center(
           child: Padding(

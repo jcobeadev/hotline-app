@@ -3,6 +3,8 @@ import 'package:pasacao_hotline/components/office_tile.dart';
 import 'package:pasacao_hotline/models/office.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pasacao_hotline/pages/office_details_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -90,7 +92,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   itemBuilder: (context, index) {
                     final office = offices[index];
-                    return OfficeTile(office: office);
+                    return OfficeTile(
+                        office: office,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => OfficeDetailsPage(office: office),
+                            ),
+                          );
+                        });
                   },
                 ),
               ),

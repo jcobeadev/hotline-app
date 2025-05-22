@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- ✅ Permission should be declared here -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
         android:label="pasacao_hotline"
         android:name="${applicationName}"

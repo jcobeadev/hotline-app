@@ -3,17 +3,15 @@ import 'package:pasacao_hotline/models/office.dart';
 
 class OfficeTile extends StatelessWidget {
   final Office office;
-  // final VoidCallback onTap;
+  final VoidCallback onTap;
 
   // const OfficeTile({super.key, required this.onTap});
-  const OfficeTile({super.key, required this.office});
+  const OfficeTile({super.key, required this.office, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // TODO: Navigate to office detail
-      },
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -40,7 +38,7 @@ class OfficeTile extends StatelessWidget {
             Text(
               office.name,
               style: const TextStyle(
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.bold,
                 fontSize: 14,
               ),
             )
