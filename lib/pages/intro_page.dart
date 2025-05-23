@@ -57,7 +57,7 @@ class IntroPage extends StatelessWidget {
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.grey[900],
+                        color: const Color(0xFFFDC556),
                         borderRadius: BorderRadius.circular(12)),
                     padding: const EdgeInsets.all(25),
                     child: const Center(
@@ -66,7 +66,7 @@ class IntroPage extends StatelessWidget {
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                            fontSize: 20),
                       ),
                     ),
                   ),

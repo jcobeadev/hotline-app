@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
         offices = freshOffices;
       });
     } catch (error) {
-      print('❌ Failed to fetch from Supabase: $error');
+      // print('❌ Failed to fetch from Supabase: $error');
       // Optionally show a Snackbar or dialog:
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Offline: showing cached hotlines')),
