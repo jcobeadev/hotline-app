@@ -2,9 +2,10 @@
     <!-- ✅ Permission should be declared here -->
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
-        android:label="pasacao_hotline"
-        android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Pasacao Hotline"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/LaunchTheme"
+        android:name="${applicationName}">
         <activity
             android:name=".MainActivity"
             android:exported="true"
