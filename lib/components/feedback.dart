@@ -39,7 +39,8 @@ Future<void> showFeedbackDialog(BuildContext context) async {
                     return IconButton(
                       icon: Icon(
                         icon,
-                        color: selectedMood == index ? Colors.orange : Colors.grey,
+                        color:
+                            selectedMood == index ? Colors.orange : Colors.grey,
                         size: 32,
                       ),
                       onPressed: () => setState(() => selectedMood = index),
@@ -59,25 +60,39 @@ Future<void> showFeedbackDialog(BuildContext context) async {
                 ),
                 const SizedBox(height: 24),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        await _submitFeedback(context, selectedMood, controller.text.trim());
+                        await _submitFeedback(
+                            context, selectedMood, controller.text.trim());
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                         foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 12),
                       ),
                       child: const Text('Send'),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 16),
                     OutlinedButton(
                       onPressed: () => Navigator.pop(context),
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 12),
+                      ),
                       child: const Text('Cancel'),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -87,7 +102,8 @@ Future<void> showFeedbackDialog(BuildContext context) async {
   );
 }
 
-Future<void> _submitFeedback(BuildContext context, int mood, String message) async {
+Future<void> _submitFeedback(
+    BuildContext context, int mood, String message) async {
   try {
     final supabase = Supabase.instance.client;
     await supabase.from('Feedbacks').insert({
