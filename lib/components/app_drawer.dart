@@ -40,7 +40,7 @@ class _AppDrawerState extends State<AppDrawer> {
               Container(
                 padding: const EdgeInsets.only(top: 80),
                 alignment: Alignment.center,
-                child: Lottie.asset('assets/animations/phone.json', width: 150),
+                child: Lottie.asset('assets/animations/call.json', width: 200),
               ),
 
               Padding(
