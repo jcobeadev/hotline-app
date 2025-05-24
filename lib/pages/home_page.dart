@@ -5,7 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pasacao_hotline/pages/office_details_page.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -60,53 +59,66 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void onTap() {}
+  Future<void> _refreshOffices() async {
+    await fetchOfficesFromSupabase();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SafeArea(
-        child: Padding(
-          padding:
-              const EdgeInsets.fromLTRB(16, 24, 16, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Offices',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+        child: RefreshIndicator(
+          color: Colors.grey[900],
+          onRefresh: _refreshOffices,
+          child: Scrollbar(
+            thumbVisibility: false,
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 24, 16, 48),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Offices',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: offices.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                      ),
+                      itemBuilder: (context, index) {
+                        final office = offices[index];
+                        return OfficeTile(
+                          office: office,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    OfficeDetailsPage(office: office),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 12),
-              Expanded(
-                child: GridView.builder(
-                  padding: const EdgeInsets.only(bottom: 48),
-                  itemCount: offices.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemBuilder: (context, index) {
-                    final office = offices[index];
-                    return OfficeTile(
-                        office: office,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => OfficeDetailsPage(office: office),
-                            ),
-                          );
-                        });
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
