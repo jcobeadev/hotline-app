@@ -131,10 +131,15 @@ class OfficeDetailsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Image.asset(
-                'assets/images/logos/${office.imageAsset}',
-                height: 180,
-              ),
+              child: office.imageAsset == 'default.png'
+                  ? const Icon(
+                      Icons.business_center_rounded,
+                      size: 100,
+                    )
+                  : Image.asset(
+                      'assets/images/logos/${office.imageAsset}',
+                      height: 180,
+                    ),
             ),
             if (office.mobile != null && office.mobile!.isNotEmpty)
               _buildSection(

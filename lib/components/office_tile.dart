@@ -27,11 +27,16 @@ class OfficeTile extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/logos/${office.imageAsset}',
-              height: 100,
-              fit: BoxFit.cover,
-            ),
+            office.imageAsset == 'default.png'
+                ? const Icon(
+                    Icons.business_center_rounded,
+                    size: 100,
+                  )
+                : Image.asset(
+                    'assets/images/logos/${office.imageAsset}',
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
             // Icon(office['icon'],
             //     size: 32, color: Colors.deepPurple),
             const SizedBox(height: 10),
