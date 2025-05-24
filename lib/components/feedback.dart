@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 Future<void> showFeedbackDialog(BuildContext context) async {
   final TextEditingController controller = TextEditingController();
@@ -104,6 +105,14 @@ Future<void> showFeedbackDialog(BuildContext context) async {
 
 Future<void> _submitFeedback(
     BuildContext context, int mood, String message) async {
+  final connectivity = await Connectivity().checkConnectivity();
+  if (connectivity == ConnectivityResult.none) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('❌ No internet connection')),
+    );
+    return;
+  }
+
   try {
     final supabase = Supabase.instance.client;
     await supabase.from('Feedbacks').insert({
@@ -117,7 +126,8 @@ Future<void> _submitFeedback(
     );
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('❌ Failed to send feedback: $e')),
+      const SnackBar(
+          content: Text('❌ Failed to send feedback. Please try again later.')),
     );
   }
 }

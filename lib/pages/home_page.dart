@@ -5,6 +5,7 @@ import 'package:pasacao_hotline/models/office.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pasacao_hotline/pages/office_details_page.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,6 +32,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchOfficesFromSupabase() async {
+    final connectivity = await Connectivity().checkConnectivity();
+    if (connectivity == ConnectivityResult.none) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No internet connection')),
+      );
+      return;
+    }
+
     try {
       final supabase = Supabase.instance.client;
       final List<dynamic> raw =
@@ -53,7 +62,7 @@ class _HomePageState extends State<HomePage> {
       // print('❌ Failed to fetch from Supabase: $error');
       // Optionally show a Snackbar or dialog:
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Offline: showing cached hotlines')),
+        const SnackBar(content: Text('No internet connection: Please try again.')),
       );
     }
   }
