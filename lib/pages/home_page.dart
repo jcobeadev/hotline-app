@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       final List<dynamic> raw = await supabase
           .from('Offices')
           .select()
-          .order('created_at', ascending: true);
+          .order('seq', ascending: true);
 
       final freshOffices = raw
           .map((item) => Office.fromJson(item as Map<String, dynamic>))

@@ -23,13 +23,14 @@ class OfficeAdapter extends TypeAdapter<Office> {
       phone: (fields[3] as List?)?.cast<String>(),
       radio: fields[4] as String?,
       imageAsset: fields[5] as String,
+      seq: fields.containsKey(6) ? fields[6] as int : 99,
     );
   }
 
   @override
   void write(BinaryWriter writer, Office obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class OfficeAdapter extends TypeAdapter<Office> {
       ..writeByte(4)
       ..write(obj.radio)
       ..writeByte(5)
-      ..write(obj.imageAsset);
+      ..write(obj.imageAsset)
+      ..writeByte(6)
+      ..write(obj.seq);
   }
 
   @override

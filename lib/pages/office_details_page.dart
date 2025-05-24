@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 import 'package:pasacao_hotline/utils/network_utils.dart';
 
-
 class OfficeDetailsPage extends StatelessWidget {
   final Office office;
 
@@ -62,10 +61,13 @@ class OfficeDetailsPage extends StatelessWidget {
                   if (iconPath != null)
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
-                      child: Image.asset(
-                        iconPath,
-                        height: 35,
-                        width: 45,
+                      child: SizedBox(
+                        height: 25,
+                        width: 30,
+                        child: Image.asset(
+                          iconPath,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                 ],
@@ -164,8 +166,7 @@ class OfficeDetailsPage extends StatelessWidget {
                   )
                 ],
               ),
-
-              const SizedBox(height: 80),
+            const SizedBox(height: 80),
           ],
         ),
       ),
